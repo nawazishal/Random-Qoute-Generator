@@ -7,7 +7,7 @@ export class QouteMachine extends Component {
         super(props)
     
         this.state = {
-             qoutes : ['Bruce','Diana','Clarke']
+             qoutes : ['Batman','WonderGirl','Superman']
         }
        
     }
@@ -42,7 +42,6 @@ createList(items){
                 <div>
                    <form className="qoute-box">
                      <h1 className="text">{typeof this.state.qoute}</h1>
-                     <p className="author">Author</p>
                      <button className="new-qoute"  onClick={this.get}>New Qoute</button>
                      <button className="tweet-qoute" onClick={this.tweetQoute}>Tweet Qoute</button>
                    </form>
