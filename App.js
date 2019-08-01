@@ -1,16 +1,11 @@
 import React from "react";
-// import Markdown from './MarkDown PreView/Markdown'
-// import RefsDemo from './AppFolder/FocusInput'
 import './App.css';
-// import FocusInput from "./AppFolder/FocusInput";
-// import Markdown from "./MarkDown PreView/Markdown";
-import QouteMachine from "./AppFolder/QouteMachine";
+import Qoutes from "./Component/Qoutes";
 function App() {
   return (
     <div>
       <header className="App-header">
-      <QouteMachine />
-      </header>
+      <Qoutes />
     </div>
   );
 }
