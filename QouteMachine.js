@@ -1,56 +1,30 @@
-import React, { Component } from 'react'
-import Random from 'lodash'
-import RefsDemo from './RefsDemo';
+import React, { useState,useEffect } from 'react';
+import axios from 'axios'
 
-export class QouteMachine extends Component {
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-             qoutes : ['Batman','WonderGirl','Superman']
-        }
-       
-    }
+export default function Qoutes() {
+     const [qoute, setqoute] = useState({})
+     const [id, setid] = useState(1)
+     const [btnId,setbtnId]=useState(1)
 
- 
-    componentDidMount() {
-        fetch(
-          "https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json"
-        )
-        .then(result => result.json())
-        .then(qoutes=>{
-            this.setState({
-                qoutes:qoutes
-            })
+     useEffect(()=>{
+         axios.get(`https://jsonplaceholder.typicode.com/todos/${btnId}`)
+         .then(response => {
+             setqoute(response.data)
+         })
+        .catch((error)=>{
+            console.log(error)
         })
-           
-    }
-
-    tweetQoute= ()=>{
-        window.open("https://twitter.com/intent/tweet");
-        alert("Success!")
-    }
-createList(items){
-    return <li>{items.text}</li>
+     },[btnId])
+    const  hanldeinput=()=>{
+      setbtnId(id)
+     }
+    
+    return (
+        <div>
+            <input type="text" value={id} onChange={e => setid(e.target.value)} />
+            <button onClick={hanldeinput}>fetch qoute</button>
+            <h1>{qoute.title} </h1>
+            <button className="tweet-qoute"  onClick={()=>{window.open("https://twitter.com/intent/tweet"); alert('successful')}}>Tweet Qoute</button>
+        </div>
+    )
 }
-
-    render() {
-      let result= this.state.qoutes
-      console.log(result)
-        return (
-            <div>
-                <div>
-                   <form className="qoute-box">
-                     <h1 className="text">{typeof this.state.qoute}</h1>
-                     <button className="new-qoute"  onClick={this.get}>New Qoute</button>
-                     <button className="tweet-qoute" onClick={this.tweetQoute}>Tweet Qoute</button>
-                   </form>
-
-                </div> 
-                <RefsDemo list={this.state.qoutes}   />
-            </div>
-        )
-    }
-}
-
-export default QouteMachine
